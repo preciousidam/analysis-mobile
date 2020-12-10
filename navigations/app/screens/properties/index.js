@@ -4,16 +4,13 @@ import {View, Text} from 'react-native';
 import { useSelector } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { PolicyListView } from './list';
-import NewPolicy from './new';
-
-
-
+import { PropertyListView } from './list';
 
 
 const Tab = createMaterialTopTabNavigator();
+const Stack = createStackNavigator();
 
-export default function PolicyNavigator({navigation}){
+export const  PropertyNavigator = ({navigation}) => {
     const {Navigator, Screen} = Tab;
     const areas = [ 'ikoyi', 'lekki', 'oniru', 'vi' ]
     return (
@@ -21,7 +18,7 @@ export default function PolicyNavigator({navigation}){
             {areas.map(area => (
                 <Screen
                     key={area}
-                    component={PolicyListView}
+                    component={PropertyListView}
                     name={area.toUpperCase()}
                     options={{
                         headerShown: false,
@@ -33,3 +30,21 @@ export default function PolicyNavigator({navigation}){
         </Navigator>
     )
 }
+
+export const StackNavigator = ({}) => {
+    const {Navigator, Screen} = Stack;
+
+    return (
+        <Navigator>
+            <Screen
+                name="app_root"
+                component={PropertyNavigator}
+                options={{
+                    title: 'Properties',
+                }}
+            />
+        </Navigator>
+    )
+}
+
+export default StackNavigator;

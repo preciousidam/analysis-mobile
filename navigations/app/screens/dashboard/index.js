@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { Avatar } from 'react-native-elements';
 import { View, TouchableOpacity, Text } from 'react-native';
 
@@ -9,11 +10,53 @@ import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import Dashboard from './Dashboard';
 import { useTheme } from '@react-navigation/native';
 import PropertyNavigator from '../properties';
-import ClaimNavigator from '../claims';
+import SettingNavigator from '../profile';
+import { SingleNewsView } from './singleView';
+import { SinglePropertyView } from '../properties/singleView';
+import { ComparePropertyView } from '../properties/compareView';
+import { SearchScreen } from '../search';
 
 
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+
+export const StackNavigator = ({}) => {
+    const {Navigator, Screen} = Stack;
+    return (
+        <Navigator>
+            <Screen 
+                name="App"
+                component={HomeNavigation}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Screen 
+                name="SingleNewsView"
+                component={SingleNewsView}
+                options={{
+                    
+                }}
+            />
+            <Screen 
+                name="SinglePropertyView"
+                component={SinglePropertyView}
+                options={{
+                    
+                }}
+            />
+            <Screen 
+                name="ComparePropertyView"
+                component={ComparePropertyView}
+                options={{
+                    title: 'Similar Properties'
+                }}
+            />
+        </Navigator>
+    );
+}
 
 export function HomeNavigation({navigation}){
     const {colors} = useTheme();
@@ -45,8 +88,8 @@ export function HomeNavigation({navigation}){
                         />);
                     }
 
-                    else if (route.name === 'More'){
-                        iconType = <Ionicon name='ios-menu' size={size} color={color} />;
+                    else if (route.name === 'Search'){
+                        iconType = <Ionicon name='ios-search' size={size} color={color} />;
                     }
 
                     return iconType;
@@ -64,11 +107,11 @@ export function HomeNavigation({navigation}){
             
             <Screen
                 name="Profile"
-                 component={ClaimNavigator}
+                 component={SettingNavigator}
             />
             <Screen
-                name="More"
-                component={ClaimNavigator}
+                name="Search"
+                component={SearchScreen}
             />
         </Navigator>
     );

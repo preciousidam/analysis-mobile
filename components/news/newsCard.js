@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image,} from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-import { useTheme } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 
 
-export  const News = ({featuredImage, description, title, publishedAt, style}) => {
-    const {colors, dark} = useTheme()
+export  const News = ({id, featuredImage, description, title, publishedAt, style}) => {
+    const {colors, dark} = useTheme();
+    const navigation = useNavigation()
     return(
-        <TouchableOpacity activeOpacity={0.7} style={[styles.card, style]}  onPress={() => console.log('clicked')}>
+        <TouchableOpacity activeOpacity={0.7} style={[styles.card, style]}  onPress={() => navigation.navigate('SingleNewsView', {id})}>
             <View style={styles.card}>
                 <Image style={styles.mealImage} source={featuredImage} />
                <View style={styles.detail}>

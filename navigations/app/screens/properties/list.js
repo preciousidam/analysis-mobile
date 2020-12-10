@@ -8,7 +8,7 @@ import FocusAwareStatusBar from '../../../../components/statusBar';
 import { updateAsync } from '../../../../store/reducers/property';
 
 
-export const PolicyListView = ({navigation, route}) => {
+export const PropertyListView = ({navigation, route}) => {
     const {colors, dark} = useTheme();
     const {navigate} = navigation;
     const {params: {area}} = route;
@@ -19,7 +19,7 @@ export const PolicyListView = ({navigation, route}) => {
     },[area]);
 
     return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, height: '100%', backgroundColor: colors.card}}>
             <PropertyList area={area} />
             <FocusAwareStatusBar barStyle={dark? 'light-content': 'dark-content' } backgroundColor={colors.card} />
         </View>

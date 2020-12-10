@@ -1,12 +1,13 @@
 import React from 'react';
 import {FlatList, View, StyleSheet,} from 'react-native';
-import { news } from '../../constants';
+import { useSelector } from 'react-redux';
 
 import News from "./newsCard";
 
 
 
 export const NewsList = _ => {
+    const news = useSelector(state => state.news);
     
     function item({item}){
         return (

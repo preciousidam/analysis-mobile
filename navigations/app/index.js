@@ -8,7 +8,7 @@ import DrawerCustom from '../../components/drawer';
 import NotificationNavigation from './screens/notifications';
 import {WithBadge} from '../../components/badge';
 import { colors } from 'react-native-elements';
-import { HomeNavigation } from './screens/dashboard';
+import { StackNavigator } from './screens/dashboard';
 
 
 const Drawer = createDrawerNavigator();
@@ -22,7 +22,7 @@ export const AppNavigator = ({}) => {
         <Navigator drawerContent={props => <DrawerCustom {...props} />} >
             <Screen
                 name="Home"
-                component={HomeNavigation}
+                component={StackNavigator}
                 options={{
                     title: 'Dashboard',
                     drawerIcon: ({color, size}) => <Ionicon name='ios-home' color={color} size={size} />

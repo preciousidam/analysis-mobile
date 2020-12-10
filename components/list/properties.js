@@ -6,17 +6,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Fontiso from 'react-native-vector-icons/Fontisto';
 import { useSelector } from 'react-redux';
 
-
+const M = 1000000;
 export const PropertiesList = ({area}) => {
     const {colors} = useTheme();
     const data = useSelector(state => state.properties.filter(x => x.area === area));
     const backColors = [colors.info, colors.success, colors.warning, colors['primary-400']];
     
     const {navigate} = useNavigation();
-
-    useEffect(() => {
-        console.log(data)
-    }, [data]);
     
     const renderItems = ({item, index}) => (
         <Activity
@@ -40,18 +36,21 @@ export const PropertiesList = ({area}) => {
 
 export default PropertiesList;
 
-export const Activity = ({ name, color }) => {
+export const Activity = ({ id, name, color, bedrooms, rents, type }) => {
     const {colors} = useTheme();
-    
+    const navigation = useNavigation()
+
     return (
-        <TouchableOpacity onPress={_ => console.log('property')} activeOpacity={.7}>
+        <TouchableOpacity onPress={_ => navigation.navigate('SinglePropertyView', {id})} activeOpacity={.7}>
             <View style={styles.item}>
                 
                 <Text style={[styles.icon, {backgroundColor: color}]}>{name[0]}</Text>
                 
                 <View style={styles.nameCont}>
                     <Text  style={styles.bold}>{name}</Text>
+                    <Text style={styles.subText}>{bedrooms} Bedroom {type}</Text>
                 </View>
+                <Text style={styles.price}>{`${'\u20A6'} ${rents[rents?.length -1]?.amount/M}M`}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -61,8 +60,6 @@ export const Activity = ({ name, color }) => {
 const styles = StyleSheet.create({
     container:{
         width: '100%',
-        marginVertical: 20,
-        marginTop: 10,
         flex: 1,
     },
     item:{
@@ -92,5 +89,14 @@ const styles = StyleSheet.create({
         padding: 15,
         width: '100%',
         flex: 8.5,
-    },  
+    }, 
+    subText: {
+        color: '#858585',
+        fontFamily: 'OpenSans_400Regular'
+    },
+    price: {
+        fontFamily: 'OpenSans_700Bold',
+        position: "absolute",
+        right: 10,
+    }
 });

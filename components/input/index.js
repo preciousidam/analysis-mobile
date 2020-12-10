@@ -93,7 +93,7 @@ export const SearchInput = ({style, contProps, inputStyle, onChangeText, value, 
     return (
         <View 
             {...contProps} 
-            style={{...styles.container, ...style, borderColor, backgroundColor: focused? 'transparent':'#d8d8d8'}}
+            style={{...styles.container, ...style, borderColor,}}
         >   
             <View style={{marginRight: 10}}>
                 <Ionicon name='md-search' size={20} color={colors.highlight} />
